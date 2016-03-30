@@ -6,11 +6,11 @@ server {
   listen 80;
 
   # listen on both hosts
-  server_name example.com www.example.com;
+  server_name {{TARGET.HOST}} www.{{TARGET.HOST}};
 
   # and redirect to the https host (declared below)
   # avoiding http://www -> https://www -> https:// chain.
-  return 301 https://example.com$request_uri;
+  return 301 https://{{TARGET.HOST}}$request_uri;
 }
 
 server {
@@ -18,12 +18,12 @@ server {
   listen 443 ssl spdy;
 
   # listen on the wrong host
-  server_name www.example.com;
+  server_name www.{{TARGET.HOST}};
 
   include h5bp/directive-only/ssl.conf;
 
   # and redirect to the non-www host (declared below)
-  return 301 https://example.com$request_uri;
+  return 301 https://{{TARGET.HOST}}$request_uri;
 }
 
 server {
@@ -36,12 +36,12 @@ server {
   listen 443 ssl spdy;
 
   # The host name to respond to
-  server_name example.com;
+  server_name {{TARGET.HOST}};
 
   include h5bp/directive-only/ssl.conf;
 
   # Path for static files
-  root /var/www/example.com/public;
+  root {{PATHS.STATIC_ROOT}};
 
   #Specify a charset
   charset utf-8;

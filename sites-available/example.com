@@ -8,10 +8,10 @@ server {
   listen 80;
 
   # listen on the www host
-  server_name www.example.com;
+  server_name www.{{TARGET.HOST}};
 
   # and redirect to the non-www host (declared below)
-  return 301 $scheme://example.com$request_uri;
+  return 301 $scheme://{{TARGET.HOST}}$request_uri;
 }
 
 server {
@@ -23,10 +23,10 @@ server {
   listen 80;
 
   # The host name to respond to
-  server_name example.com;
+  server_name {{TARGET.HOST}};
 
   # Path for static files
-  root /sites/example.com/public;
+  root {{PATHS.STATIC_ROOT}};
 
   # Specify a charset
   charset utf-8;
