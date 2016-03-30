@@ -65,7 +65,14 @@ function main {
             continue
         elif [[ $line =~ ^(\s*)include\s*(.*)\; ]];
         then
-            main ${BASH_REMATCH[2]}
+            include=${BASH_REMATCH[2]}
+            if [ -f $include ];
+            then
+                main $include
+            else
+                >&2 echo "WARNING: Unable to find $include"
+                echo $line
+            fi
         else
             echo "$line"
         fi
