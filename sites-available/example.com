@@ -36,4 +36,7 @@ server {
 
   # Include the basic h5bp config set
   include h5bp/basic.conf;
+
+  # Include wsgi config
+  include lib/uwsgi.conf;
 }
