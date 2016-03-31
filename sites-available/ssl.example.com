@@ -2,7 +2,7 @@
 # the right one -- http://wiki.nginx.org/Pitfalls#Server_Name
 #
 server {
-  listen [::]:80;
+  listen [::]:80 ipv6only=on;
   listen 80;
 
   # listen on both hosts
